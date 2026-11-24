@@ -1,3 +1,4 @@
+# Naive approach
 # Generate a detailed report on a topic
 # Then generate a summary based on the report
 
