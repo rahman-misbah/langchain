@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
@@ -14,4 +15,9 @@ model = ChatHuggingFace(llm=llm)
 
 prompt_template = PromptTemplate(template="Generate 5 interesting facts about {topic}")
 
-chain = prompt_template | model
+chain = prompt_template | model | StrOutputParser()
+
+result = chain.invoke({"topic": "CPUs"})
+print(result)
+
+# chain.get_graph().print_ascii()
