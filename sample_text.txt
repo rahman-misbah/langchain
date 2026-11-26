@@ -1,0 +1,18 @@
+Quantization is the process of compressing a model by changing the data type of its weights and biases. It reduces a model's accuracy and reasoning by increases the speed and compression substantially. The accuracy loss can be minimal depending on the type of quantization applied. 
+
+In LangChain, quantizing a model requires `accelerate` and `bitsandbytes` libraries installed. Quantization is done by sending a `quantization_config` (`BitsAndBytesConfig` object, found in `transformers`) to `model_kwargs`.
+
+Running `Phi-3-mini-4k-instruct` on RTX3050 4 GB required a 4-bit quantization, with these configs:
+
+```python
+quantization_config = BitsAndBytesConfig(
+	load_in_4bit=True,
+	bnb_4bit_compute_dtype="float16",
+	bnb_4bit_quant_type="nf4"
+)
+```
+
+- `load_in_4bit` - The master switch to turn on 4-bit quantization
+- `bnb_4bit_compute_dtype` - The model is stored in memory in 4-bit size, but GPU cannot do calculations on a 4-bit data type. They temporarily convert the 4-bit data type to another data type, perform calculations, then revert it to 4-bits. **This options tells which data type to convert to**. `float16` is chosen because it is the native language of modern GPUs
+- `bnb_4bit_quant_type` - The mathematical trick to keep the model smart
+- `nf4` - Stands for NormalFloat4, which uses a clever mathematical distribution that groups the numbers where they naturally cluster, saving the model's accuracy from dropping significantly

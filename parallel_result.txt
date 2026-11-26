@@ -1,0 +1,68 @@
+# Study Material
+
+**Quantization Notes:**
+
+1. **Definition and Purpose:**
+   - Quantization is a technique used to compress machine learning models by changing the data type of their weights and biases.
+   - It aims to reduce a model's size and increase its computational speed at the cost of some loss in accuracy.
+
+2. **Impact on Model Accuracy:**
+   - The accuracy loss due to quantization can vary but is often minimal based on the chosen quantization method.
+
+3. **LangChain Quantization:**
+   - Quantization in LangChain requires the installation of the `accelerate` and `bitsandbytes` libraries.
+   - The process involves specifying a `quantization_config`, which is a `BitsAndBytesConfig` object from the `transformers` module.
+
+4. **Example Configurations:**
+   - A configuration for the `Phi-3-mini-4k-instruct` model on an RTX3050 GPU is shown as an example.
+   - Configurations include a 4-bit quantization setup with specific parameters:
+     - `load_in_4bit`: A boolean to enable 4-bit quantization.
+     - `bnb_4bit_compute_dtype`: The data type used for temporary computations, "float16" is used to match modern GPU capabilities.
+     - `bnb_4bit_quant_type`: The quantization technique used to preserve the model's age, "nf4" (NormalFloat4) is chosen for its ability to group numbers and minimize accuracy loss.
+
+5. **Quantization Technique (NormalFloat4):**
+   - "nf4" or NormalFloat4 is a quantization type that clusters data points in a manner that prevents significant accuracy degradation.
+
+**Quiz:**
+
+**Quantization in Machine Learning Models: Understanding Key Concepts**
+
+1. **What is quantization in the context of machine learning models?**
+   - A) A process to enhance model's accuracy
+   - B) A process of compressing a model by changing the data type of its weights and biases
+   - C) A method to increase the size of the model for better performance
+   - D) A technique for adding more layers to a neural network
+
+   *Correct Answer: B)* A process of compressing a model by changing the data type of its weights and biases
+
+2. **What is the primary effect of quantization on a model?**
+   - A) Reduction in accuracy in exchange for speed and compression
+   - B) Increase in model's age
+   - C) No change in model performance
+   - D) The model becomes more complex
+
+   *Correct Answer: A)* Reduction in accuracy in exchange for speed and compression
+
+3. **What Python libraries are required to perform quantization in LangChain?**
+   - A) numpy and pandas
+   - B) matplotlib and seaborn
+   - C) accelerate and bitsandbytes
+   - D) scikit-learn and TensorFlow
+
+   *Correct Answer: C)* accelerate and bitsandbytes
+
+4. **What does the `BitsAndBytesConfig` object in `transformers` library help with?**
+   - A) Managing memory used by the model
+   - B) Quantization process
+   - C) Saving and loading of models
+   - D) Data preprocessing
+
+   *Correct Answer: B)* Quantization process
+
+5. **What does the `nf4` quantization type do?**
+   - A) It converts the model to a 4-bit size
+   - B) It uses a mathematical distribution that clusters numbers to save the model' age
+   - C) It increases the model's computation time
+   - D) It improves the accuracy of the model
+
+   *Correct Answer: B)* It uses a mathematical distribution that clusters numbers to save the model' age
