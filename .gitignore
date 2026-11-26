@@ -1,3 +1,4 @@
 .env
 venv
 scratchpad.py
+parallel_result.txt
